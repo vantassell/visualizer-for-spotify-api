@@ -94,7 +94,7 @@ router.get("/logged", async (req, res) => {
       console.log("redirecting to client");
       const query = querystring.stringify(accountInfo);
       // res.redirect(`${process.env.CLIENT_REDIRECTURI}?${query}`);
-      res.redirect(`${process.env.DOMAIN}/api/logged?${query}`);
+      res.redirect(`http://localhost:3000/api/logged?${query}`);
     });
 });
 
