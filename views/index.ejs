@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+
+<div class=fullDynamicBackground>
+    <div class=trackInfoBlended>
+        <p>Track: <%= locals.songTitle || "AVT error, sorry!" %></p>
+        <p>Artist: <%= locals.songArtist || "AVT error, sorry!"%></p>
+        <p>Album: <%= locals.songAlbum || "AVT error, sorry!"%></p>
+    </div>
+    <div class=container>
+        <div class=artworkContainer>
+            <img src=<%= locals.songArtworkURL%>>
+
+            <!--                // <Image src={songArtworkURL} fill={true} style={{objectFit: "contain"}} alt="album art"/>-->
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

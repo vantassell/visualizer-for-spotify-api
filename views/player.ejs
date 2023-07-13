@@ -1,0 +1,19 @@
+
+<main>
+    <div className=fullDynamicBackground>
+        <div className=trackInfoBlended>
+            <p>Track: <%= songTitle%>></p>
+            <p>Artist: <%= songArtist%>></p>
+            <p>Album: <%= songAlbum%>></p>
+        </div>
+        <div className=container>
+            <div className=artworkContainer>
+                <img src=<%= songArtworkURL%>>
+
+<!--                // <Image src={songArtworkURL} fill={true} style={{objectFit: "contain"}} alt="album art"/>-->
+            </div>
+        </div>
+    </div>
+</main>
+);
+}
