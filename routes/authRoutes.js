@@ -95,7 +95,7 @@ router.get("/logged", async (req, res) => {
       };
 
       const query = querystring.stringify(accountInfo);
-      const clientRedirect = `${process.env.WEB_APP_DOMAIN}/api/logged?${query}`;
+      const clientRedirect = `${process.env.WEB_APP_DOMAIN}/?${query}`;
       console.log(`redirecting to client: ${clientRedirect}`);
       res.redirect(clientRedirect);
     });
