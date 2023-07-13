@@ -30,9 +30,12 @@ router.get("/login", async (req, res) => {
       response_type: "code",
       client_id: process.env.SPOTIFY_CLIENT_ID,
       scope: scope,
-      redirect_uri: `${process.env.DOMAIN}/api/logged`,
+      redirect_uri: `${process.env.API_DOMAIN}/api/logged`,
     });
-  // console.log(redi);
+
+  console.log(
+    `redirecting to spotify/authorize with redirect to api_server/api/logged`
+  );
   res.redirect(redi);
 });
 
@@ -41,7 +44,7 @@ router.get("/logged", async (req, res) => {
   const body = {
     grant_type: "authorization_code",
     code: req.query.code,
-    redirect_uri: `${process.env.DOMAIN}/api/logged`,
+    redirect_uri: `${process.env.API_DOMAIN}/api/logged`,
     client_id: process.env.SPOTIFY_CLIENT_ID,
     client_secret: process.env.SPOTIFY_CLIENT_SECRET,
   };
@@ -91,10 +94,10 @@ router.get("/logged", async (req, res) => {
         displayName,
       };
 
-      console.log("redirecting to client");
       const query = querystring.stringify(accountInfo);
-      // res.redirect(`${process.env.CLIENT_REDIRECTURI}?${query}`);
-      res.redirect(`http://localhost:3000/api/logged?${query}`);
+      const clientRedirect = `${process.env.WEB_APP_DOMAIN}/api/logged?${query}`;
+      console.log(`redirecting to client: ${clientRedirect}`);
+      res.redirect(clientRedirect);
     });
 });
 
