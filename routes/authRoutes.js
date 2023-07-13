@@ -30,7 +30,7 @@ router.get("/login", async (req, res) => {
       response_type: "code",
       client_id: process.env.SPOTIFY_CLIENT_ID,
       scope: scope,
-      redirect_uri: process.env.SPOTIFY_REDIRECTURI,
+      redirect_uri: `${process.env.DOMAIN}/api/logged`,
     });
   // console.log(redi);
   res.redirect(redi);
@@ -41,7 +41,7 @@ router.get("/logged", async (req, res) => {
   const body = {
     grant_type: "authorization_code",
     code: req.query.code,
-    redirect_uri: process.env.SPOTIFY_REDIRECTURI,
+    redirect_uri: `${process.env.DOMAIN}/api/logged`,
     client_id: process.env.SPOTIFY_CLIENT_ID,
     client_secret: process.env.SPOTIFY_CLIENT_SECRET,
   };
@@ -93,7 +93,8 @@ router.get("/logged", async (req, res) => {
 
       console.log("redirecting to client");
       const query = querystring.stringify(accountInfo);
-      res.redirect(`${process.env.CLIENT_REDIRECTURI}?${query}`);
+      // res.redirect(`${process.env.CLIENT_REDIRECTURI}?${query}`);
+      res.redirect(`${process.env.DOMAIN}/api/logged?${query}`);
     });
 });
 
