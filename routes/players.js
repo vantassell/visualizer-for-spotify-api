@@ -103,6 +103,8 @@ router.get("/", async (req, res) => {
           newAccessToken,
           newExpiresAt,
         });
+      console.log(`Sending client newAccessToken: ${newAccessToken}`);
+      console.log(`Sending client newExpiresAt: ${newExpiresAt}`);
 
         console.log("about to return from refresh callback");
       });
