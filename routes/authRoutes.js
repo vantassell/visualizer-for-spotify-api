@@ -7,34 +7,25 @@ const prisma = new PrismaClient();
 
 // /api/login
 router.get("/login", async (req, res) => {
-  const scope = `user-modify-playback-state
+  const scope = `
     user-read-playback-state
     user-read-currently-playing
-    user-library-modify
-    user-library-read
-    user-top-read
-    user-read-email
+    user-read-playback-position
     user-read-private
-    playlist-read-private
-    playlist-modify-public
-    user-read-playback-state
-    user-modify-playback-state
-    user-read-currently-playing 
-    app-remote-control
-    streaming
-    user-read-playback-position`;
+    user-read-email
+`;
 
-  const redi =
-    "https://accounts.spotify.com/authorize?" +
+  const redi = "https://accounts.spotify.com/authorize?" +
     querystring.stringify({
       response_type: "code",
       client_id: process.env.SPOTIFY_CLIENT_ID,
       scope: scope,
+      show_dialog: true,
       redirect_uri: `${process.env.API_DOMAIN}/api/logged`,
     });
 
   console.log(
-    `redirecting to spotify/authorize with redirect to api_server/api/logged`
+    `redirecting to spotify/authorize with redirect to api_server/api/logged`,
   );
   res.redirect(redi);
 });
@@ -64,10 +55,10 @@ router.get("/logged", async (req, res) => {
       console.log("posting to spotify for initial token");
 
       const accessToken = data.access_token || "error getting token on server";
-      const refreshToken =
-        data.refresh_token || "error getting token on server";
-      const expiresAt =
-        Math.floor(new Date().getTime() / 1000) + (data.expires_in || 0);
+      const refreshToken = data.refresh_token ||
+        "error getting token on server";
+      const expiresAt = Math.floor(new Date().getTime() / 1000) +
+        (data.expires_in || 0);
 
       // get spotify profile info
       let email = "default__";
@@ -79,8 +70,8 @@ router.get("/logged", async (req, res) => {
         .then((response) => response.json())
         .then((data) => {
           email = data.email || "error getting email on server";
-          displayName =
-            data.display_name || "error getting display name on server";
+          displayName = data.display_name ||
+            "error getting display name on server";
         });
 
       // prisma
@@ -95,7 +86,7 @@ router.get("/logged", async (req, res) => {
       };
 
       const query = querystring.stringify(accountInfo);
-      const clientRedirect = `${process.env.WEB_APP_DOMAIN}/?${query}`;
+      const clientRedirect = `${process.env.WEB_APP_DOMAIN}/login?${query}`;
       console.log(`redirecting to client: ${clientRedirect}`);
       res.redirect(clientRedirect);
     });
