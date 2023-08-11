@@ -133,7 +133,7 @@ router.get("/", async (req, res) => {
   const album = data.item.album.name || "";
   const artworkURL = data.item.album.images[0].url || "";
   const spotifyURI = data.item.uri || "";
-  const spotifyTrackLink = `http://open.spotify.com/track${spotifyURI.split(":").pop()}`;
+  const spotifyTrackLink = `http://open.spotify.com/track/${spotifyURI.split(":").pop()}`;
   //
   // res.render("index", { songTitle, songArtist, songAlbum, songArtworkURL });
   res.json({ title, artist, album, artworkURL, spotifyTrackLink});
