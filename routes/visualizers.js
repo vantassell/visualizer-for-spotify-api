@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 
-// /players
+// /visualizers
 router.get("/", async (req, res) => {
 
   const accessToken = req.query.accessToken;
@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
   if (!spotifyRes) {
     // This will activate the closest `error.js` Error Boundary
     console.trace(spotifyRes);
-    throw new Error("Failed to fetch data from /players");
+    throw new Error("Failed to fetch data from /visualizers");
     res.json({
       title: "No response received from Spotify...",
     });

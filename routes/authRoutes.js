@@ -32,6 +32,11 @@ router.get("/login", async (req, res) => {
 
 // /api/logged
 router.get("/logged", async (req, res) => {
+ 
+  console.log"/logged req from spotify: ", req);
+  console.log("/logged response from spotify: ", res);
+
+
   const body = {
     grant_type: "authorization_code",
     code: req.query.code,

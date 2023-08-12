@@ -16,5 +16,5 @@ PORT
 SPOTIFY_CLIENT_ID
 SPOTIFY_CLIENT_SECRET
 API_DOMAIN
-WEB_APP_DOMAIN
+WEB_APP_DOMAIN (note: this assumes that domain does not end domain with '/')
 ```
