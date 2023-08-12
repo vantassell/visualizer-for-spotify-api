@@ -33,9 +33,17 @@ router.get("/login", async (req, res) => {
 // /api/logged
 router.get("/logged", async (req, res) => {
  
-  console.log"/logged req from spotify: ", req);
-  console.log("/logged response from spotify: ", res);
+  // console.log("/logged req from spotify: ", req.query);
+  // console.log("/logged response from spotify: ", res);
+  const query = req.query;
 
+  if(query.error) {
+   console.log("ERROR: Spotify had an error during sign-in on the server");
+      const clientRedirect = `${process.env.WEB_APP_DOMAIN}`;
+      console.log(`redirecting to client: ${clientRedirect}`);
+      res.redirect(clientRedirect);
+    return;
+  }
 
   const body = {
     grant_type: "authorization_code",
