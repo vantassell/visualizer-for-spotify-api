@@ -1,10 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-
 // /visualizers
 router.get("/", async (req, res) => {
-
   const accessToken = req.query.accessToken;
   const refreshToken = req.query.refreshToken;
 
@@ -17,13 +15,29 @@ router.get("/", async (req, res) => {
     },
   );
 
+
+  console.log("spotifyRes: ", spotifyRes.status);
   // Recommendation: handle errors
   if (!spotifyRes) {
-    // This will activate the closest `error.js` Error Boundary
+    console.log("bad response from Spotify");
     console.trace(spotifyRes);
-    throw new Error("Failed to fetch data from /visualizers");
     res.json({
-      title: "No response received from Spotify...",
+      currentlyPlayingNothing:
+        "Failed to receive a response from spotify, something is very wrong",
+      artworkURL:
+        "https://static1.srcdn.com/wordpress/wp-content/uploads/2020/03/michael-scott-the-office-memes.jpg",
+    });
+    return;
+  }
+
+  // user not registered on developer dashboard
+  if (spotifyRes.status === 403) {
+    console.log("Error from spotify: ", spotifyRes.message)
+    console.log("\tUser not registered with spotify developer dashboard");
+    res.json({
+      currentlyPlayingNothing: "User not registered on developer dashboard",
+      artworkURL:
+        "https://static1.srcdn.com/wordpress/wp-content/uploads/2020/03/michael-scott-the-office-memes.jpg",
     });
     return;
   }
@@ -115,11 +129,9 @@ router.get("/", async (req, res) => {
   const spotifyTrackLink = `http://open.spotify.com/track/${spotifyURI
     .split(":")
     .pop()}`;
-  
- 
+
   res.json({ title, artist, album, artworkURL, spotifyTrackLink });
 });
-
 
 const encodeFormData = (data) => {
   return Object.keys(data)
