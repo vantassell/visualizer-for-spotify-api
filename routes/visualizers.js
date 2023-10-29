@@ -15,7 +15,6 @@ router.get("/", async (req, res) => {
     },
   );
 
-
   console.log("spotifyRes: ", spotifyRes.status);
   // Recommendation: handle errors
   if (!spotifyRes) {
@@ -32,7 +31,7 @@ router.get("/", async (req, res) => {
 
   // user not registered on developer dashboard
   if (spotifyRes.status === 403) {
-    console.log("Error from spotify: ", spotifyRes.message)
+    console.log("Error from spotify: ", spotifyRes.message);
     console.log("\tUser not registered with spotify developer dashboard");
     res.json({
       currentlyPlayingNothing: "User not registered on developer dashboard",
@@ -120,6 +119,7 @@ router.get("/", async (req, res) => {
     return;
   }
 
+  console.log(data.item);
   const title = data.item.name || "";
   const artist =
     data.item.artists.map((artist) => artist.name).join(", ") || "";
