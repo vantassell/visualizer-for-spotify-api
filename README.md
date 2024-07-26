@@ -1,20 +1,9 @@
 # Spotify Visualizer API
 
+## Archive
 
-## Link to deployed webapp ##
-Currently hosting as a static site on github pages.
-https://vantassell.github.io/spotify-visualizer-webapp/
+Rather than having a spearate API and webapp, I've merged these into a single repo that contains client and server code. This repo is no longer needed.
 
-## API Deployment Instructions ##
-Use the below command to push to heroku prod
+Checkout the new project here.
 
-`git push heroku main`
-
-### Set these ENV variables ###
-```
-PORT
-SPOTIFY_CLIENT_ID
-SPOTIFY_CLIENT_SECRET
-API_DOMAIN
-WEB_APP_DOMAIN (note: this assumes that domain does not end domain with '/')
-```
+https://github.com/vantassell/visualizer-for-spotify
